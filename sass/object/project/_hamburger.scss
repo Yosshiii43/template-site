@@ -1,0 +1,73 @@
+@charset "UTF-8";
+/*=======================
+ハンバーガーボタン
+=======================*/
+@use "../../foundation/forwords" as fw;
+@use "sass:math";
+
+$btnWidth: 32px;
+$btnHeight: 2px;
+.p-hamburger{
+  background-color: fw.$color--gray;
+  width: 56px;//header高さ56px
+  height: 56px;//header高さ56px
+  border: none;
+  position: relative;
+  z-index: 9999;
+  @include fw.tab{
+    display: none;
+  }
+
+  &::before,
+  &::after{
+    content: "";
+    width: $btnWidth;
+    height: $btnHeight;
+    border-radius: $btnHeight;
+    background: fw.$color--white;
+    position: absolute;
+    left: calc( 50% - math.div(#{$btnWidth}, 2 ));
+    display: block;
+    transition: transform 0.2s;
+  }
+
+  &::before{
+    top: 19px;
+  }
+
+  &::after{
+    bottom: 19px;
+  }
+
+  > span{
+    width: $btnWidth;
+    height: $btnHeight;
+    border-radius: $btnHeight;
+    font-size: 0px;
+    background: fw.$color--white;
+    background-size: auto $btnHeight;
+    position: absolute;
+    left: calc( 50% - math.div( #{$btnWidth}, 2));
+    top: calc( 50% - math.div( #{$btnHeight}, 2));
+    transition: transdorm 0.2s;
+  }
+
+  &.active{
+    &::before{
+      transform: rotate( 30deg );
+      top: 28px;
+    }
+    &::after{
+      transform: rotate( -30deg );
+      top: 28px;
+    }
+    > span{
+      opacity: 0;
+    }
+  }
+  
+}
+
+body.is-open{
+  overflow: hidden; //position: fixed;ではSP時にページトップに戻ってしまうため変更
+}

@@ -1,0 +1,92 @@
+@use "sass:math";
+
+////ブレイクポイント
+
+@mixin sp {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin tab {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin pc {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+
+////Figmaデザインカンプデバイス幅とvw出力
+
+$pcDesignSize: 1440;
+$tabDesignSize: 834;
+$spDesignSize: 375;
+
+//画面幅に合わせてpxをvwに変換する
+@function pc-vw($pixelsVw) {
+  @return math.div($pixelsVw , $pcDesignSize) * 100vw;
+}
+
+@function tab-vw($pixelsVw) {
+  @return math.div($pixelsVw , $tabDesignSize) * 100vw;
+}
+
+@function sp-vw($pixelsVw) {
+  @return math.div($pixelsVw , $spDesignSize) * 100vw;
+}
+
+//clampでvwに変換（最小px, デザイン上のpx, 最大px を引数に）
+@function pc-clamp($minPx, $designPx, $maxPx) {
+  $vwValue: math.div($designPx, $pcDesignSize) * 100vw;
+  @return clamp(#{$minPx}px, #{$vwValue}, #{$maxPx}px);
+}
+@function tab-clamp($minPx, $designPx, $maxPx) {
+  $vwValue: math.div($designPx, $tabDesignSize) * 100vw;
+  @return clamp(#{$minPx}px, #{$vwValue}, #{$maxPx}px);
+}
+
+@function sp-clamp($minPx, $designPx, $maxPx) {
+  $vwValue: math.div($designPx, $spDesignSize) * 100vw;
+  @return clamp(#{$minPx}px, #{$vwValue}, #{$maxPx}px);
+}
+
+
+////pxをremに変換する関数
+$root-size: 16; //htmlに設定してあるfont-size
+@function rem($px) {
+  @return math.div($px, $root-size) * 1rem;
+}
+
+//// flexbox
+// 使い方　@include fw.flexSet($align:flex-start, $justy:flex-start, $dir:row, $wrap:nowrap);
+@mixin flexSet($align:flex-start, $justy:flex-start, $dir:row, $wrap:nowrap) {
+  display        : flex;
+  align-items    : $align;
+  justify-content: $justy;
+  flex-direction : $dir;
+  flex-wrap      : $wrap;
+}
+
+//// Angle Arrow
+// 使い方　@include fw.arrow($width, $bold, $color, $deg);
+@mixin arrow($width, $bold, $color, $deg) {
+  border-style: solid;
+  border-width: 0 #{$bold}px #{$bold}px 0;
+  content: "";
+  display: inline-block;
+  position: absolute;
+  height: #{$width}px;
+  width: #{$width}px;
+  //色
+  border-color: $color;
+  //角度
+  @if ( $deg == "left" )        { transform: rotate(135deg); }
+  @else if ( $deg == "top" )    { transform: rotate(225deg); }
+  @else if ( $deg == "right" )  { transform: rotate(-45deg); }
+  @else if ( $deg == "bottom" ) { transform: rotate(45deg);  }
+}

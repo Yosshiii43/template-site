@@ -1,0 +1,69 @@
+@charset "UTF-8";
+/*=======================
+グローバルナビゲーション
+=======================*/
+@use "../../foundation/forwords" as fw;
+@use "sass:math";
+
+.p-nav {
+  padding-top: 99px;
+  @include fw.flexSet($align:flex-start, $justy:center, $dir:row, $wrap:nowrap);
+  @include fw.tab{
+    padding-top: 0;
+    @include fw.flexSet($align:center, $justy:space-between, $dir:row, $wrap:nowrap);
+  }
+
+  &__list {
+    width: 100%;
+    @include fw.flexSet($align:center, $justy:center, $dir:column, $wrap:nowrap);
+    @include fw.tab{
+      @include fw.flexSet($align:center, $justy:flex-end, $dir:row, $wrap:nowrap);
+      height: 100%;
+    }
+
+    .p-nav__item {
+      width: 100%;
+      margin-bottom: fw.rem(2);
+      @include fw.tab{
+        margin-bottom: 0;
+        width: auto;
+        height: 100%;
+      }
+      .p-nav__link {
+        color: fw.$color--gray;
+        width: 100%;
+        position: relative;
+        @include fw.flexSet($align:flex-start, $justy:center, $dir:column, $wrap:nowrap);
+        padding: 8px 16px;
+        text-align: center;
+        font-size: fw.rem(20);
+        @include fw.tab{
+          height: 100%;
+          padding: 0 20px;
+        }
+        &::before,
+        &::after{
+          display: block;
+          content: "";
+          position: absolute;
+          background-color: fw.$color--gray;
+
+          @include fw.tab{
+            content: none;
+          }
+        }
+      }
+
+      &:last-of-type {
+        .p-nav__link{
+          color: fw.$color--white;
+          background-color: fw.$color--gray;
+          &::before,
+          &::after{
+          content: none;
+        }
+        }
+      }
+    }
+  }
+}

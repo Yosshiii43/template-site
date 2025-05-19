@@ -1,0 +1,11 @@
+@charset "UTF-8";
+/*=======================
+メインカラム
+=======================*/
+@use "../../foundation/forwords" as fw;
+@use "sass:math";
+
+.p-main{
+  background-color: aliceblue;
+  height: 100vh;
+}

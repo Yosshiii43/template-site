@@ -1,0 +1,14 @@
+@charset "UTF-8";
+/*=======================
+メイン
+=======================*/
+@use "sass:math";
+@use "../foundation/forwords" as fw;
+
+.l-main{
+  padding-top: 56px;
+
+  @include fw.tab{
+    padding-top: 64px;
+  }
+}
