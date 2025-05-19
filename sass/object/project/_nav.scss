@@ -15,7 +15,10 @@
 
   &__list {
     width: 100%;
-    @include fw.flexSet($align:center, $justy:center, $dir:column, $wrap:nowrap);
+    // --- SP: 縦並び・上詰め ---
+    @include fw.flexSet($align:flex-start, $justy:flex-start, $dir:column, $wrap:nowrap);
+
+    // --- PC/Tab で横並びに切り替え ---
     @include fw.tab{
       @include fw.flexSet($align:center, $justy:flex-end, $dir:row, $wrap:nowrap);
       height: 100%;
@@ -24,33 +27,26 @@
     .p-nav__item {
       width: 100%;
       margin-bottom: fw.rem(2);
+
       @include fw.tab{
         margin-bottom: 0;
         width: auto;
         height: 100%;
       }
+
       .p-nav__link {
         color: fw.$color--gray;
         width: 100%;
         position: relative;
         @include fw.flexSet($align:flex-start, $justy:center, $dir:column, $wrap:nowrap);
         padding: 8px 16px;
-        text-align: center;
+        text-align: left;
         font-size: fw.rem(20);
+
         @include fw.tab{
           height: 100%;
           padding: 0 20px;
-        }
-        &::before,
-        &::after{
-          display: block;
-          content: "";
-          position: absolute;
-          background-color: fw.$color--gray;
-
-          @include fw.tab{
-            content: none;
-          }
+          text-align: center;
         }
       }
 
@@ -59,11 +55,74 @@
           color: fw.$color--white;
           background-color: fw.$color--gray;
           &::before,
-          &::after{
-          content: none;
-        }
+          &::after{ content:none; }
         }
       }
     }
+
+    // 子メニューをもつ li
+    .p-nav__item--hasChild { position: relative; }
+  }
+}
+
+/* ------- 子 ul ------- */
+.p-childNav__list {
+  @include fw.reset-list;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 12rem;
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0,0,0,.06);
+
+  /* PC 非表示状態 */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(.5rem);
+  transition: .25s;
+
+  /* PC 開く条件 */
+  .p-nav__item--hasChild:hover &,
+  .p-nav__item--hasChild:focus-within &,
+  .p-nav__item--hasChild.is-open & {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+/* 子リンク */
+.p-childNav__link {
+  display: block;
+  padding: .75rem 1rem;
+  line-height: 1.4;
+
+  &:hover,
+  &:focus { background:#f3f3f3; }
+}
+
+/* ───────── スマホ (<=767px) ───────── */
+@media (max-width: 767px) {
+  /* 親リスト自体を縦並び＆上詰めに固定 */
+  .p-nav__list {
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  /* 子メニュー：アコーディオン用にフローに戻す */
+  .p-childNav__list {
+    position: static;
+    border: none;
+    box-shadow: none;
+    transform: none;
+    opacity: 1;               // アニメーション簡略化
+    visibility: visible;
+    display: none;            // 閉じた状態
+  }
+
+  /* 開いたら表示 */
+  .p-nav__item--hasChild.is-open > .p-childNav__list {
+    display: block;
   }
 }

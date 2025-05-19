@@ -52,7 +52,7 @@ $btnHeight: 2px;
     transition: transdorm 0.2s;
   }
 
-  &.active{
+  &.is-open{
     &::before{
       transform: rotate( 30deg );
       top: 28px;

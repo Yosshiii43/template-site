@@ -90,3 +90,10 @@ $root-size: 16; //htmlに設定してあるfont-size
   @else if ( $deg == "right" )  { transform: rotate(-45deg); }
   @else if ( $deg == "bottom" ) { transform: rotate(45deg);  }
 }
+
+////listスタイルリセット（将来destyle.cssを削除した時のための保険）
+@mixin reset-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}

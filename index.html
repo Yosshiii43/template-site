@@ -16,14 +16,67 @@
           </a>
         </h1>
 
-        <nav class="p-header__nav p-nav" id="js-nav">
+        <nav class="p-header__nav p-nav" id="js-nav" aria-label="グローバルナビ">
           <ul class="p-nav__list">
+            <!-- 単体メニュー -->
             <li class="p-nav__item">
-              <a href="#about" class="p-nav__link">サンプル1</a>
+              <a href="#about" class="p-nav__link">単体メニュー</a>
             </li>
-            <li class="p-nav__item">
-              <a href="#access" class="p-nav__link">サンプル2</a>
+
+            <!-- ▼ 親 + 子メニュー1 -------------- -->
+            <li class="p-nav__item p-nav__item--hasChild" data-has-child>
+              <!-- button にすると “クリック＝開閉” が明確。リンク先が必要なら JS で２回目クリックで遷移する等に出来る -->
+              <button
+                class="p-nav__link"
+                type="button"
+                aria-haspopup="true" 
+                aria-expanded="false"
+                aria-controls="child-nav-1"
+              >
+                親メニュー1
+              </button>
+
+              <ul class="p-childNav__list" id="child-nav-1" role="menu">
+                <li class="p-childNav__item" role="none">
+                  <a href="#child1" class="p-childNav__link" role="menuitem">子メニュー1-1</a>
+                </li>
+                <li class="p-childNav__item" role="none">
+                  <a href="#child2" class="p-childNav__link" role="menuitem">子メニュー1-2</a>
+                </li>
+                <li class="p-childNav__item" role="none">
+                  <a href="#child3" class="p-childNav__link" role="menuitem">子メニュー1-3</a>
+                </li>
+              </ul>
             </li>
+            <!-- ▲ 子メニュー1 ------------------------ -->
+
+            <!-- ▼ 親 + 子メニュー2 -------------- -->
+            <li class="p-nav__item p-nav__item--hasChild" data-has-child>
+              <!-- button にすると “クリック＝開閉” が明確。リンク先が必要なら JS で２回目クリックで遷移する等に出来る -->
+              <button
+                class="p-nav__link"
+                type="button"
+                aria-haspopup="true" 
+                aria-expanded="false"
+                aria-controls="child-nav-2"
+              >
+                親メニュー2
+              </button>
+
+              <ul class="p-childNav__list" id="child-nav-2" role="menu">
+                <li class="p-childNav__item" role="none">
+                  <a href="#child1" class="p-childNav__link" role="menuitem">子メニュー2-1</a>
+                </li>
+                <li class="p-childNav__item" role="none">
+                  <a href="#child2" class="p-childNav__link" role="menuitem">子メニュー2-2</a>
+                </li>
+                <li class="p-childNav__item" role="none">
+                  <a href="#child3" class="p-childNav__link" role="menuitem">子メニュー2-3</a>
+                </li>
+              </ul>
+            </li>
+            <!-- ▲ 子メニュー ------------------------ -->
+
             <li class="p-nav__item">
               <a href="#contact" class="p-nav__link c-nav__link--contact">お問い合わせ</a>
                             <ul class="p-childNav__list">
