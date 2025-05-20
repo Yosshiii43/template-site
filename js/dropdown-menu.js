@@ -115,6 +115,37 @@ function initDropdownMenus({ useToggleButton = true } = {}) {
       }
     });
   });
+
+  // aria-expanded をホバーでも補完する（PC用対応）
+  const parentButtons = document.querySelectorAll('[data-has-child] > .p-nav__link');
+
+  parentButtons.forEach(btn => {
+    const parentLi = btn.closest('[data-has-child]');
+    const submenu = parentLi.querySelector('.p-childNav__list');
+
+    btn.addEventListener('mouseenter', () => {
+      btn.setAttribute('aria-expanded', true);
+    });
+
+    // pointerleaveのあと、少し待ってからまだhover中かを確認
+    btn.addEventListener('mouseleave', () => {
+      setTimeout(() => {
+        if (!parentLi.matches(':hover')) {
+          btn.setAttribute('aria-expanded', false);
+        }
+      }, 50); // ほんの少し待つことで子に移っただけのケースを回避
+    });
+
+    // 子メニューからも離れたら false に
+    submenu?.addEventListener('mouseleave', () => {
+      setTimeout(() => {
+        if (!parentLi.matches(':hover')) {
+          btn.setAttribute('aria-expanded', false);
+        }
+      }, 50);
+    });
+  });
+
 }
 
 /* ==== 実行 ==== */
