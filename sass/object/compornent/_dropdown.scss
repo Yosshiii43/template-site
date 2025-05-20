@@ -1,0 +1,66 @@
+/* ドロップダウン／アコーディオン共通スタイル */
+
+.p-nav__item--hasChild {
+  position: relative;
+}
+
+.p-childNav__list {
+  //@include fw.reset-list; // ul/liリセット（FLOCSS想定）
+  // FLOCSS未使用時は下記で代替
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  //以上fw.reset-listの代わり
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 12rem;
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0,0,0,.06);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.5rem);
+  transition: .25s;
+  z-index: 100;
+}
+
+/* PC: ホバーまたは is-open で表示 */
+@media (min-width: 768px) {
+  .p-nav__item--hasChild:hover > .p-childNav__list,
+  .p-nav__item--hasChild.is-open > .p-childNav__list {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+/* モバイル: アコーディオン展開 */
+@media (max-width: 767px) {
+  .p-childNav__list {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    border: none;
+    box-shadow: none;
+    display: none;
+  }
+  .p-nav__item--hasChild.is-open > .p-childNav__list {
+    display: block;
+  }
+}
+
+/* トグルボタン（▼） */
+.c-toggle {
+  background: none;
+  border: none;
+  padding: 0 0.5em;
+  font-size: 1em;
+  cursor: pointer;
+  line-height: 1;
+
+  @media (min-width: 768px) {
+    display: none; // PCで非表示にしたい場合
+  }
+}

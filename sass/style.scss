@@ -6,8 +6,13 @@
 //layout
   @use "layput/main" as lm;
 
+//component
+  @use "object/compornent/dropdown";
+
 //project
   @use "object/project/header" as ph;
   @use "object/project/main" as pm;
   @use "object/project/hamburger";
   @use "object/project/nav";
+
+//utility

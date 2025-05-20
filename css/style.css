@@ -424,6 +424,68 @@ a {
   }
 }
 
+/* ドロップダウン／アコーディオン共通スタイル */
+.p-nav__item--hasChild {
+  position: relative;
+}
+
+.p-childNav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 12rem;
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.5rem);
+  transition: 0.25s;
+  z-index: 100;
+}
+
+/* PC: ホバーまたは is-open で表示 */
+@media (min-width: 768px) {
+  .p-nav__item--hasChild:hover > .p-childNav__list,
+.p-nav__item--hasChild.is-open > .p-childNav__list {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+/* モバイル: アコーディオン展開 */
+@media (max-width: 767px) {
+  .p-childNav__list {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    border: none;
+    box-shadow: none;
+    display: none;
+  }
+  .p-nav__item--hasChild.is-open > .p-childNav__list {
+    display: block;
+  }
+}
+/* トグルボタン（▼） */
+.c-toggle {
+  background: none;
+  border: none;
+  padding: 0 0.5em;
+  font-size: 1em;
+  cursor: pointer;
+  line-height: 1;
+}
+@media (min-width: 768px) {
+  .c-toggle {
+    display: none;
+  }
+}
+
 /*=======================
 ヘッダー
 =======================*/
@@ -644,66 +706,5 @@ body.is-open {
 }
 .p-nav__list .p-nav__item:last-of-type .p-nav__link::before, .p-nav__list .p-nav__item:last-of-type .p-nav__link::after {
   content: none;
-}
-.p-nav__list .p-nav__item--hasChild {
-  position: relative;
-}
-
-/* ------- 子 ul ------- */
-.p-childNav__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  min-width: 12rem;
-  background: #fff;
-  border: 1px solid #ddd;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
-  /* PC 非表示状態 */
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(0.5rem);
-  transition: 0.25s;
-  /* PC 開く条件 */
-}
-.p-nav__item--hasChild:hover .p-childNav__list, .p-nav__item--hasChild:focus-within .p-childNav__list, .p-nav__item--hasChild.is-open .p-childNav__list {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-/* 子リンク */
-.p-childNav__link {
-  display: block;
-  padding: 0.75rem 1rem;
-  line-height: 1.4;
-}
-.p-childNav__link:hover, .p-childNav__link:focus {
-  background: #f3f3f3;
-}
-
-/* ───────── スマホ (<=767px) ───────── */
-@media (max-width: 767px) {
-  /* 親リスト自体を縦並び＆上詰めに固定 */
-  .p-nav__list {
-    justify-content: flex-start;
-    align-items: flex-start;
-  }
-  /* 子メニュー：アコーディオン用にフローに戻す */
-  .p-childNav__list {
-    position: static;
-    border: none;
-    box-shadow: none;
-    transform: none;
-    opacity: 1;
-    visibility: visible;
-    display: none;
-  }
-  /* 開いたら表示 */
-  .p-nav__item--hasChild.is-open > .p-childNav__list {
-    display: block !important;
-  }
 }
 /*# sourceMappingURL=style.css.map */
