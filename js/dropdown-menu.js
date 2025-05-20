@@ -7,7 +7,7 @@
 =========================================== */
 function initNavigation() {
   initHamburger();      // ハンバーガー（SP）
-  initDropdownMenus({ useToggleButton: false });  // ドロップダウン（PC/SP）
+  initDropdownMenus({ useToggleButton: true });  // ドロップダウン（PC/SP）
 }
 
 /* ──────────────────────────────────────────

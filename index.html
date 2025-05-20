@@ -16,6 +16,14 @@
           </a>
         </h1>
 
+        <button
+          class="p-header__hamburger p-hamburger"
+          id="js-hamburger"
+          aria-controls="js-nav"
+          aria-expanded="false">
+          <span>menuボタン</span>
+        </button>
+
         <nav class="p-header__nav p-nav" id="js-nav" aria-label="グローバルナビ">
           <ul class="p-nav__list">
             <!-- 単体メニュー -->
@@ -23,32 +31,47 @@
               <a href="#about" class="p-nav__link">単体メニュー</a>
             </li>
 
-            <!-- ▼ 親 + 子メニュー1 -------------- -->
-            <li class="p-nav__item p-nav__item--hasChild" data-has-child>
-              <button class="p-nav__link"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                      aria-controls="submenu-1">
-                親カテゴリ
-              </button>
-              <ul class="p-childNav__list" id="submenu-1">
-                <li><a href="/page-a">ページA</a></li>
-                <li><a href="/page-b">ページB</a></li>
-              </ul>
-            </li>
+        <!-- 親リンク + ▼トグルボタン（親ページあり） -->
+        <li class="p-nav__item p-nav__item--hasChild p-nav__item--hasChild--double" data-has-child>
+          <a href="/parent-page" class="p-nav__link"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="submenu-1">
+            親カテゴリ
+          </a>
+          <button class="c-toggle"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  aria-controls="submenu-1"
+                  aria-label="子メニューを開閉する">
+            ▼
+          </button>
+          <ul class="p-childNav__list" id="submenu-1">
+            <li><a href="/child-1">子ページ1</a></li>
+            <li><a href="/child-2">子ページ2</a></li>
+          </ul>
+        </li>
 
-            <li class="p-nav__item p-nav__item--hasChild" data-has-child>
-              <button class="p-nav__link"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                      aria-controls="submenu-2">
-                親カテゴリ
-              </button>
-              <ul class="p-childNav__list" id="submenu-2">
-                <li><a href="/page-a">ページA</a></li>
-                <li><a href="/page-b">ページB</a></li>
-              </ul>
-            </li>
+        <li class="p-nav__item p-nav__item--hasChild p-nav__item--hasChild--double" data-has-child>
+          <a href="/parent-page" class="p-nav__link"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="submenu-2">
+            親カテゴリ
+          </a>
+          <button class="c-toggle"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  aria-controls="submenu-1"
+                  aria-label="子メニューを開閉する">
+            ▼
+          </button>
+          <ul class="p-childNav__list" id="submenu-2">
+            <li><a href="/child-1">子ページ1</a></li>
+            <li><a href="/child-2">子ページ2</a></li>
+          </ul>
+        </li>
+
             <li class="p-nav__item">
               <a href="#contact" class="p-nav__link c-nav__link--contact">お問い合わせ</a>
                             <ul class="p-childNav__list">
@@ -56,10 +79,6 @@
             </li>
           </ul>
         </nav>
-
-        <button class="p-header__hamburger p-hamburger" id="js-hamburger" tabindex="0">
-          <span>menuボタン</span>
-        </button>
 
       </div><!-- .header_inner-->
     </header>

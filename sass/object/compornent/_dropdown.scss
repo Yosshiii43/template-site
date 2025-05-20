@@ -61,6 +61,7 @@
   line-height: 1;
 
   @media (min-width: 768px) {
-    display: none; // PCで非表示にしたい場合
+    display: inline-block; // 常に表示
+    font-size: .75rem;
   }
 }

@@ -1,61 +1,75 @@
 @charset "UTF-8";
-/*=======================
-グローバルナビゲーション
-=======================*/
+/* ===============================
+   グローバルナビゲーション（共通構造）
+   → 子メニューやパターン別制御は別ファイルに分離
+================================ */
+
 @use "../../foundation/forwords" as fw;
 @use "sass:math";
 
 .p-nav {
-  padding-top: 99px;
-  @include fw.flexSet($align:flex-start, $justy:center, $dir:row, $wrap:nowrap);
-  @include fw.tab{
+  padding-top: fw.rem(99); // SP：ロゴ下スペース
+
+  @include fw.tab {
     padding-top: 0;
-    @include fw.flexSet($align:center, $justy:space-between, $dir:row, $wrap:nowrap);
+    @include fw.flexSet($align: center, $justy: space-between, $dir: row, $wrap: nowrap);
   }
 
   &__list {
     width: 100%;
-    // --- SP: 縦並び・上詰め ---
-    @include fw.flexSet($align:flex-start, $justy:flex-start, $dir:column, $wrap:nowrap);
+    @include fw.flexSet($align: flex-start, $justy: flex-start, $dir: column, $wrap: nowrap);
+    padding-inline: fw.rem(16); // SPの左右余白
 
-    // --- PC/Tab で横並びに切り替え ---
-    @include fw.tab{
-      @include fw.flexSet($align:center, $justy:flex-end, $dir:row, $wrap:nowrap);
+    @include fw.tab {
+      @include fw.flexSet($align: center, $justy: flex-end, $dir: row, $wrap: nowrap);
       height: 100%;
+      padding-inline: fw.rem(32); // PCの左右余白
     }
 
     .p-nav__item {
       width: 100%;
       margin-bottom: fw.rem(2);
 
-      @include fw.tab{
+      @include fw.tab {
+        display: flex;           // ← PCで横並び＆中央揃え
+        align-items: center;
+        justify-content: center;
         margin-bottom: 0;
         width: auto;
         height: 100%;
       }
 
       .p-nav__link {
-        color: fw.$color--gray;
+        display: block;
         width: 100%;
-        position: relative;
-        @include fw.flexSet($align:flex-start, $justy:center, $dir:column, $wrap:nowrap);
-        padding: 8px 16px;
-        text-align: left;
+        color: fw.$color--gray;
         font-size: fw.rem(20);
+        text-align: left;
+        padding: fw.rem(12) fw.rem(16);
+        position: relative;
 
-        @include fw.tab{
+        @include fw.tab {
+          display: flex;         // ← 中のテキストを縦中央に
+          align-items: center;
+          justify-content: center;
           height: 100%;
-          padding: 0 20px;
+          width: auto;
+          padding: 0 fw.rem(20); // PC時は上下padding無し・左右に余白
           text-align: center;
         }
       }
 
+      // 最後のメニュー（例：CTA・お問い合わせ）
       &:last-of-type {
-        .p-nav__link{
+        background-color: fw.$color--gray;
+
+        .p-nav__link {
           color: fw.$color--white;
-          background-color: fw.$color--gray;
+
           &::before,
-          &::after{ content:none; }
+          &::after {
+            content: none;
+          }
         }
       }
     }

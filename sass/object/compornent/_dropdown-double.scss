@@ -1,0 +1,28 @@
+.p-nav__item--hasChild--double {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap; // 念のため行折返し許可（狭い画面で安心）
+
+  .p-nav__link {
+    flex: 1; // ← 幅を持たせて自然に縮む
+    margin-right: 0.5em;
+    padding: 0; // ← paddingは親で管理（ズレ防止）
+    text-align: left;
+  }
+
+  .c-toggle {
+    flex-shrink: 0;
+    font-size: 0.9em;
+    padding: 0 0.5em;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+  }
+
+  .p-childNav__list {
+    flex-basis: 100%; // ↓下段に配置
+    margin-top: 0.5em;
+  }
+}

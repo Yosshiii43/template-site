@@ -482,8 +482,35 @@ a {
 }
 @media (min-width: 768px) {
   .c-toggle {
-    display: none;
+    display: inline-block;
+    font-size: 0.75rem;
   }
+}
+
+.p-nav__item--hasChild--double {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.p-nav__item--hasChild--double .p-nav__link {
+  flex: 1;
+  margin-right: 0.5em;
+  padding: 0;
+  text-align: left;
+}
+.p-nav__item--hasChild--double .c-toggle {
+  flex-shrink: 0;
+  font-size: 0.9em;
+  padding: 0 0.5em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+}
+.p-nav__item--hasChild--double .p-childNav__list {
+  flex-basis: 100%;
+  margin-top: 0.5em;
 }
 
 /*=======================
@@ -630,16 +657,12 @@ body.is-open {
   overflow: hidden;
 }
 
-/*=======================
-グローバルナビゲーション
-=======================*/
+/* ===============================
+   グローバルナビゲーション（共通構造）
+   → 子メニューやパターン別制御は別ファイルに分離
+================================ */
 .p-nav {
-  padding-top: 99px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  padding-top: 6.1875rem;
 }
 @media (min-width: 768px) {
   .p-nav {
@@ -658,6 +681,7 @@ body.is-open {
   justify-content: flex-start;
   flex-direction: column;
   flex-wrap: nowrap;
+  padding-inline: 1rem;
 }
 @media (min-width: 768px) {
   .p-nav__list {
@@ -667,6 +691,7 @@ body.is-open {
     flex-direction: row;
     flex-wrap: nowrap;
     height: 100%;
+    padding-inline: 2rem;
   }
 }
 .p-nav__list .p-nav__item {
@@ -675,34 +700,39 @@ body.is-open {
 }
 @media (min-width: 768px) {
   .p-nav__list .p-nav__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 0;
     width: auto;
     height: 100%;
   }
 }
 .p-nav__list .p-nav__item .p-nav__link {
-  color: #55504A;
+  display: block;
   width: 100%;
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  padding: 8px 16px;
-  text-align: left;
+  color: #55504A;
   font-size: 1.25rem;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  position: relative;
 }
 @media (min-width: 768px) {
   .p-nav__list .p-nav__item .p-nav__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 100%;
-    padding: 0 20px;
+    width: auto;
+    padding: 0 1.25rem;
     text-align: center;
   }
 }
+.p-nav__list .p-nav__item:last-of-type {
+  background-color: #55504A;
+}
 .p-nav__list .p-nav__item:last-of-type .p-nav__link {
   color: #FFFFFF;
-  background-color: #55504A;
 }
 .p-nav__list .p-nav__item:last-of-type .p-nav__link::before, .p-nav__list .p-nav__item:last-of-type .p-nav__link::after {
   content: none;
